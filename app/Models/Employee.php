@@ -12,7 +12,7 @@ class Employee extends Model
     protected $fillable = [
         'employee_number',
         'departmentId',
-        'role',
+        'roleId',
         'first_name',
         'last_name',
         'email',
@@ -21,5 +21,10 @@ class Employee extends Model
 
     public function department() : BelongsTo{
         return $this->belongsTo(Employee::class , 'departmentId');
+    }
+
+    public function role() : BelongsTo{
+        return $this->belongsTo(Role::class , 'roleId');
+    }
 }
-}
+

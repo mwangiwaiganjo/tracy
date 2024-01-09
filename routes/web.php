@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LeaveController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,20 +18,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/user/profile', function () {
     return view('user');
-});
+})->middleware(['auth' => 'auth']);
 
-Route::get("/auth/login" , [AuthController::class , "renderLoginPage"]);
+
+
+Route::get("/auth/login" , [AuthController::class , "renderLoginPage"])->name('login');
+Route::get("/auth/register" , [AuthController::class , "register"]);
 Route::post("/auth/login" , [AuthController::class , "loginStore"]);
 Route::post("/auth/signup" , [AuthController::class , "signup"]);
 Route::get("/auth/logout" , [AuthController::class , "logout"]);
 
 // leave Form
-Route::get("/leave" , [LeaveController::class , "index"]);
+Route::get("/leave" , [LeaveController::class , "index"])->middleware(['auth' => 'auth']);
+Route::post("/leave" , [LeaveController::class , "store"])->middleware(['auth' => 'auth']);
 
 
 // department
@@ -39,3 +40,11 @@ Route::controller(DepartmentController::class)->group(function(){
         Route::post('' , 'store');
     });
 });
+
+//employees
+
+Route::controller(EmployeeController::class)->group(function(){
+    Route::prefix('employees')->group(function(){
+        Route::post('' , 'store');
+    });
+})->middleware(['auth' => 'auth']);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('phone_number');
             $table->string('email')->unique();
-            $table->string('role');
+            $table->foreignId('roleId')->references('id')->on('roles');
             $table->foreignId('departmentId')->references('id')->on('departments');
             $table->timestamps();
         });
