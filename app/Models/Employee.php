@@ -17,6 +17,7 @@ class Employee extends Model
         'last_name',
         'email',
         'phone_number',
+        'leave_days',
     ];
 
     public function department() : BelongsTo{

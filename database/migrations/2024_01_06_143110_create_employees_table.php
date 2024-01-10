@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
+            $table->integer('leave_days')->default(26);
             $table->string('email')->unique();
             $table->foreignId('roleId')->references('id')->on('roles');
             $table->foreignId('departmentId')->references('id')->on('departments');

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('end_date');
             $table->foreignId('employeeId')->references('id')->on('employees');
             $table->integer('period_of_days');
-            $table->integer('remaining_days')->default(26);
             $table->timestamps();
         });
     }
