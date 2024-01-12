@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LeaveMail;
 use App\Models\Employee;
 use App\Models\Leave;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LeaveController extends Controller
 {
@@ -48,7 +50,8 @@ class LeaveController extends Controller
                 'period_of_days' => $period_of_days[0]
 
             ]);
-            return redirect("/leave")->with('approved', 'Leave Approved');
+            Mail::to("edwardkabwoy@gmail.com")->send(new LeaveMail($employee->first_name , $employee->last_name , (string) $employee->leave_days , (string) $validator['start_date'] ,  (string) $validator['end_date'] ));
+            return redirect("/leave")->with('approved', 'Leave Approved , Email has been sent to the employee');
         }
 
 
