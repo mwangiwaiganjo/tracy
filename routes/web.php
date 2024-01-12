@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LeaveController;
+use App\Mail\LeaveMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +23,9 @@ Route::get('/', function () {
     return view('user');
 })->middleware(['auth' => 'auth']);
 
+// Route::get("/mail" , function(){
+//     Mail::to("edwardkabwoy@gmail.com")->send(new LeaveMail("dward" , 'kaboi' , '4'));
+// });
 
 
 Route::get("/auth/login" , [AuthController::class , "renderLoginPage"])->name('login');
