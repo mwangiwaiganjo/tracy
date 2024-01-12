@@ -87,65 +87,65 @@ function submitFormAndSendEmail() {
     const remainingDays = 26 - periodOfDays;
 
     // Call sendEmail function with params
-    sendEmail(
-        eventName,
-        startDate,
-        endDate,
-        recipientEmail,
-        periodOfDays,
-        remainingDays
-    );
+    // sendEmail(
+    //     eventName,
+    //     startDate,
+    //     endDate,
+    //     recipientEmail,
+    //     periodOfDays,
+    //     remainingDays
+    // );
 }
 
-function sendEmail(
-    eventName,
-    startDate,
-    endDate,
-    recipientEmail,
-    periodOfDays,
-    remainingDays
-) {
-    const params = {
-        eventName: eventName,
-        startDate: startDate,
-        endDate: endDate,
-        recipientEmail: recipientEmail,
-        periodOfDays: periodOfDays,
-        remainingDays: remainingDays,
-    };
+// function sendEmail(
+//     eventName,
+//     startDate,
+//     endDate,
+//     recipientEmail,
+//     periodOfDays,
+//     remainingDays
+// ) {
+//     const params = {
+//         eventName: eventName,
+//         startDate: startDate,
+//         endDate: endDate,
+//         recipientEmail: recipientEmail,
+//         periodOfDays: periodOfDays,
+//         remainingDays: remainingDays,
+//     };
 
-    const serviceID = "service_rco7yrb";
-    const templateID = "template_s74chm8";
-    const successMessageElement = document.getElementById("successMessage");
+//     const serviceID = "service_rco7yrb";
+//     const templateID = "template_s74chm8";
+//     const successMessageElement = document.getElementById("successMessage");
 
-    emailjs
-        .send(serviceID, templateID, params)
-        .then((res) => {
-            console.log(res);
-            successMessageElement.innerHTML = `
-                <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
-                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div>
-                        <span class="font-medium">Success alert!</span> Email sent successfully!
-                    </div>
-                </div>
-            `;
-            setTimeout(() => {
-                successMessageElement.innerHTML = "";
-            }, 2000);
-            // Reset form fields after successful submission
-            document.getElementById("eventForm").reset();
-            // Reset calculated fields
-            document.getElementById("dateRange").value = "";
-            document.getElementById("remainingDays").value = "";
-        })
-        .catch((err) => {
-            console.error("Error sending email:", err);
-            alert("Error sending email. Please check the console for details.");
-        });
-}
+//     emailjs
+//         .send(serviceID, templateID, params)
+//         .then((res) => {
+//             console.log(res);
+//             successMessageElement.innerHTML = `
+//                 <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+//                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+//                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+//                     </svg>
+//                     <span class="sr-only">Info</span>
+//                     <div>
+//                         <span class="font-medium">Success alert!</span> Email sent successfully!
+//                     </div>
+//                 </div>
+//             `;
+//             setTimeout(() => {
+//                 successMessageElement.innerHTML = "";
+//             }, 2000);
+//             // Reset form fields after successful submission
+//             document.getElementById("eventForm").reset();
+//             // Reset calculated fields
+//             document.getElementById("dateRange").value = "";
+//             document.getElementById("remainingDays").value = "";
+//         })
+//         .catch((err) => {
+//             console.error("Error sending email:", err);
+//             alert("Error sending email. Please check the console for details.");
+//         });
+// }
 
 
