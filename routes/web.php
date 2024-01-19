@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('user');
 })->middleware(['auth' => 'auth']);
 
+Route::get("/admin" , function(){
+    return view('admin.index');
+});
+
 // Route::get("/mail" , function(){
 //     Mail::to("edwardkabwoy@gmail.com")->send(new LeaveMail("dward" , 'kaboi' , '4'));
 // });
