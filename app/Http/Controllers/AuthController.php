@@ -37,7 +37,7 @@ class AuthController extends Controller
         }
         Auth::login($user);
 
-        return redirect()->to('/user/profile');
+        return redirect()->to('/');
 }
 
 public function signup(Request $request){
@@ -72,6 +72,12 @@ public function logout(Request $request){
     $request->session()->regenerateToken();
 
     return redirect('/auth/login');
+}
+
+public function register(Request $request){
+
+
+    return view('auth.register');
 }
 
 }

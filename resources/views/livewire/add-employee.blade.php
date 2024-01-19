@@ -16,7 +16,8 @@
                   </button>
               </div>
               <!-- Modal body -->
-              <form class="p-4 md:p-5">
+              <form action="/employees" method="post" class="p-4 md:p-5">
+                @csrf
                   <div class="grid gap-4 mb-4 grid-cols-2">
                       <div class="col-span-2">
                           <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
@@ -28,7 +29,7 @@
                       </div>
                       <div class="col-span-2 sm:col-span-1">
                         <label for="empno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Employee Number</label>
-                        <input type="text" name="empno" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="i.e 01nff" required="">
+                        <input type="text" name="employee_number" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="i.e 01nff" required="">
                     </div>
 
                     <div class="col-span-2 sm:col-span-1">
@@ -41,14 +42,23 @@
                     </div>
                       <div class="col-span-2 sm:col-span-1">
                           <label for="dept" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-                          <select id="dept" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                          <select id="deptSelect" name="departmentId"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                               <option selected="" disabled>Select Department</option>
                               @foreach ($departments as $department )
                               <option value="{{$department->id}}">{{$department->department_name}}</option>
                               @endforeach
-
                           </select>
                       </div>
+
+                      <div class="col-span-2 sm:col-span-1">
+                        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                        <select id="roleSelect" name="roleId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option selected="" disabled>Select Role</option>
+                            @foreach ($roles as $role)
+                            <option value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                       {{-- <div class="col-span-2">
                           <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Description</label>
                           <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>
@@ -61,5 +71,23 @@
               </form>
           </div>
       </div>
+   <script>
+    const deptSelect = document.getElementById("deptSelect");
+    const roleSelect = document.getElementById("roleSelect");
+    deptSelect.addEventListener("change" , function(e){
+        const deptId = e.target.value
+
+        const roles = @json($roles)
+
+        const newRoles = roles.filter((role) => role.departmentId == deptId)
+
+        if(newRoles.length <= 0) return roleSelect.innerHTML = `<option disabled selected>No role for the selected department</option>`
+        roleSelect.innerHTML = `
+            ${newRoles.map((role) => `<option value="${role.id}">${role.name}</option>`)}
+        `
+    })
+    //console.log(deptSelect);
+   </script>
   </div>
+
 
